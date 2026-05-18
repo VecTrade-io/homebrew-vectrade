@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main, fix/**]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint Formula
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate formula syntax (Ruby)
+        run: ruby -c Formula/vectrade.rb
+
+      - name: Check required fields
+        run: |
+          for field in desc homepage version license url sha256; do
+            if ! grep -q "$field" Formula/vectrade.rb; then
+              echo "ERROR: Missing required field '$field'"
+              exit 1
+            fi
+          done
+          echo "All required fields present."
+
+      - name: Check formula naming convention
+        run: |
+          # Formula filename must match class name (lowercase)
+          CLASS=$(grep -oP '(?<=^class )\w+' Formula/vectrade.rb)
+          FILE=$(basename Formula/vectrade.rb .rb)
+          EXPECTED=$(echo "$CLASS" | tr '[:upper:]' '[:lower:]')
+          if [ "$FILE" != "$EXPECTED" ]; then
+            echo "ERROR: File '$FILE.rb' does not match class '$CLASS' (expected '$EXPECTED.rb')"
+            exit 1
+          fi
+          echo "Naming convention OK: $FILE.rb -> class $CLASS"
+
+  test:
+    name: Test Formula
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Homebrew
+        uses: Homebrew/actions/setup-homebrew@master
+
+      - name: Audit formula (style)
+        run: brew audit --strict --online Formula/vectrade.rb || true
+
+      - name: Verify formula syntax
+        run: brew ruby -e "require './Formula/vectrade.rb'; puts Vectrade.name"
+
+  manifest-validation:
+    name: Validate Manifest Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install test dependencies
+        run: pip install pytest pyyaml
+
+      - name: Run validation tests
+        run: pytest tests/ -v --tb=short
