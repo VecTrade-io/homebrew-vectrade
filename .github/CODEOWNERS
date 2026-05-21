@@ -1,1 +1,11 @@
-* @VecTrade-io/sdk-maintainers
+# ─── CODEOWNERS ─────────────────────────────────────────────────────────────
+# Maps file patterns to owners/agents responsible for review.
+
+# ── Default ─────────────────────────────────────────────────────────────────
+*                           @mountek
+
+# ── Formula (vt-package-maintainer) ────────────────────────────────────────
+Formula/                    @mountek
+
+# ── CI ─────────────────────────────────────────────────────────────────────
+.github/workflows/          @mountek
