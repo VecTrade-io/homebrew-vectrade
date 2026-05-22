@@ -15,7 +15,7 @@ jobs:
     name: Lint Formula
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Validate formula syntax (Ruby)
         run: ruby -c Formula/vectrade.rb
@@ -46,7 +46,7 @@ jobs:
     name: Test Formula
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up Homebrew
         uses: Homebrew/actions/setup-homebrew@master
@@ -61,10 +61,10 @@ jobs:
     name: Validate Manifest Structure
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: "3.12"
 
@@ -78,7 +78,7 @@ jobs:
     name: Security Scan
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Check for hardcoded secrets
         run: |

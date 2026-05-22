@@ -194,7 +194,7 @@ class TestCIWorkflow:
         assert "contents: read" in ci_content
 
     def test_uses_checkout_v4(self, ci_content):
-        assert "actions/checkout@v4" in ci_content
+        assert "actions/checkout@v6" in ci_content
 
     def test_validates_ruby_syntax(self, ci_content):
         assert "ruby" in ci_content
