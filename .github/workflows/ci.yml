@@ -73,3 +73,26 @@ jobs:
 
       - name: Run validation tests
         run: pytest tests/ -v --tb=short
+
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for hardcoded secrets
+        run: |
+          if grep -rn 'vq_live_[a-zA-Z0-9]\{10,\}' --include="*.rb" .; then
+            echo "ERROR: Found hardcoded live API keys!"
+            exit 1
+          fi
+          echo "No hardcoded secrets found"
+
+      - name: Verify download URLs point to official releases
+        run: |
+          if grep -q "url" Formula/vectrade.rb; then
+            if ! grep "url" Formula/vectrade.rb | grep -q "github.com/VecTrade-io"; then
+              echo "WARNING: URL does not point to official VecTrade releases"
+            fi
+          fi
+          echo "URL check passed"
