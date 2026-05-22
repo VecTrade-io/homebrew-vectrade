@@ -71,10 +71,11 @@ class TestRepoStructure:
         assert CI_FILE.is_file()
 
     def test_no_unexpected_formula_files(self):
-        """Only vectrade.rb should be in Formula/."""
+        """Only vectrade formula files should be in Formula/."""
         formulas = list(FORMULA_DIR.glob("*.rb"))
-        assert len(formulas) == 1
-        assert formulas[0].name == "vectrade.rb"
+        assert len(formulas) >= 1
+        names = {f.name for f in formulas}
+        assert names.issubset({"vectrade.rb", "vectrade-cli.rb"})
 
 
 # ============================================================
