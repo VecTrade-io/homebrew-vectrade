@@ -5,13 +5,13 @@
 class VectradeCli < Formula
   desc "VecTrade CLI — financial data from your terminal"
   homepage "https://github.com/VecTrade-io/vectrade-cli"
-  version "0.1.0"
+  version "0.2.0"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.1.0/vectrade-cli_0.1.0_darwin_amd64.tar.gz"
-      sha256 "4d7e508e1310495f7ab7e7250c03f9be9912f00d131332ba3d157367375a0504"
+      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.2.0/vectrade-cli_0.2.0_darwin_amd64.tar.gz"
+      sha256 "42e925f7db6d5708609b3e48f695dbae184c433e9ef5fa33f89da305b1037265"
 
       define_method(:install) do
         bin.install "vectrade"
@@ -21,8 +21,8 @@ class VectradeCli < Formula
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.1.0/vectrade-cli_0.1.0_darwin_arm64.tar.gz"
-      sha256 "f8eb2fd7e8ae11eab5be143fb7428ddba0b7313dbc9f9db8664633c04482a733"
+      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.2.0/vectrade-cli_0.2.0_darwin_arm64.tar.gz"
+      sha256 "3d232b4b1ada4b8909c1c656992835343a12ce7102abf01a2f7e94df5bd358d4"
 
       define_method(:install) do
         bin.install "vectrade"
@@ -35,8 +35,8 @@ class VectradeCli < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.1.0/vectrade-cli_0.1.0_linux_amd64.tar.gz"
-      sha256 "05e8d96ae5f7c2a6aea7d9d080570408fdb21c4c70c66714c9bb4fb7bcf2405a"
+      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.2.0/vectrade-cli_0.2.0_linux_amd64.tar.gz"
+      sha256 "e9e92d6768c3fe25a7ad28c6be469166a720912f6bc3f1b7ec58fb6fa4161cf0"
       define_method(:install) do
         bin.install "vectrade"
         bash_completion.install "completions/vectrade.bash" => "vectrade"
@@ -45,8 +45,8 @@ class VectradeCli < Formula
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.1.0/vectrade-cli_0.1.0_linux_arm64.tar.gz"
-      sha256 "45b4cfffd137822b758e3bbe327ca31af5b36a280ac8a29316a893be324e06e0"
+      url "https://github.com/VecTrade-io/vectrade-cli/releases/download/v0.2.0/vectrade-cli_0.2.0_linux_arm64.tar.gz"
+      sha256 "daa4599387cdb05f4aec4c679cba96c99f6f30085716252914866bc5b2317480"
       define_method(:install) do
         bin.install "vectrade"
         bash_completion.install "completions/vectrade.bash" => "vectrade"
