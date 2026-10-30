@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **CI action reference** — use `Homebrew/actions/setup-homebrew@main`; the `master` ref no longer exists.
+
 ### Added
 
 - Initial release
