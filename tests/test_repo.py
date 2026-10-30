@@ -1,6 +1,5 @@
 """Tests for homebrew-vectrade repository structure and documentation."""
 
-import re
 from pathlib import Path
 
 import pytest
